@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tenzo Cafe and Bakers - Enterprise Bakery Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-dark: #451a03;
+      --primary: #78350f;
+      --primary-light: #92400e;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --accent-subtle: #fffbeb;
+      --bg-canvas: #faf7f2;
+      --surface: #ffffff;
+      --border: #e7e5e4;
+      --border-focus: #d97706;
+      --text-main: #1c1917;
+      --text-muted: #78716c;
+      --text-light: #a8a29e;
+      --profit-green: #065f46;
+      --profit-green-bg: #ecfdf5;
+      --profit-green-border: #a7f3d0;
+      --loss-red: #991b1b;
+      --loss-red-bg: #fef2f2;
+      --loss-red-border: #fecaca;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+      --shadow-lg: 0 10px 15px -3px rgb(69 26 3 / 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 20px 16px 40px;
+    }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header-banner {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-light));
+      color: #ffffff;
+      padding: 24px 28px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .header-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(254, 243, 199, 0.15);
+      border: 1px solid rgba(254, 243, 199, 0.3);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .header-h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .header-badge {
+      background: #fef3c7;
+      color: #78350f;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-subtitle {
+      font-size: 13px;
+      color: rgba(254, 243, 199, 0.9);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-header {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .btn-header:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .btn-header-primary {
+      background: #fbbf24;
+      color: #451a03;
+      border-color: #f59e0b;
+      font-weight: 700;
+    }
+
+    .btn-header-primary:hover {
+      background: #fcd34d;
+    }
+
+    /* 2-TAB NAVIGATION BAR */
+    .tabs-nav {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 6px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tabs-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      background: #f5f5f4;
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 6px -1px rgba(120, 53, 15, 0.25);
+    }
+
+    .tab-pill {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: rgba(0, 0, 0, 0.08);
+      color: inherit;
+    }
+
+    .tab-btn.active .tab-pill {
+      background: var(--accent-light);
+      color: var(--primary-dark);
+    }
+
+    .sync-status {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--profit-green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-right: 12px;
+    }
+
+    .sync-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* CARD CONTAINER */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      background: linear-gradient(90deg, #fbfaf8, #fdfcfb);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-step-badge {
+      width: 24px;
+      height: 24px;
+      background: var(--primary);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* BENCHMARK GRID IN TAB 1 */
+    .benchmark-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .benchmark-item {
+      background: #fdfaf6;
+      border: 1px solid #f3ebe1;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+    }
+
+    .benchmark-label {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .benchmark-val {
+      font-weight: 800;
+      color: var(--text-main);
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    /* TABLES */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    thead th {
+      background: #f8f6f4;
+      color: var(--text-main);
+      font-weight: 700;
+      padding: 10px 14px;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f5f5f4;
+      vertical-align: middle;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(254, 243, 199, 0.2);
+    }
+
+    /* INPUTS & CONTROLS */
+    .form-control {
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-family: inherit;
+      font-weight: 600;
+      color: var(--text-main);
+      background-color: #ffffff;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .form-control:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.18);
+    }
+
+    .input-prefix-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix {
+      position: absolute;
+      left: 10px;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 11px;
+      pointer-events: none;
+    }
+
+    .input-with-prefix {
+      padding-left: 28px;
+    }
+
+    /* BUTTONS */
+    .btn {
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-light);
+    }
+
+    .btn-secondary {
+      background: #f5f5f4;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #e7e5e4;
+    }
+
+    .btn-delete {
+      background: transparent;
+      color: var(--text-light);
+      border: none;
+      padding: 6px 8px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 14px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .btn-delete:hover {
+      color: #dc2626;
+      background: #fee2e2;
+    }
+
+    /* BATCH SCALER BAR */
+    .scaler-card {
+      background: #faf7f2;
+      border: 1px solid #e7e5e4;
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .scaler-presets {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .scaler-btn {
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .scaler-btn:hover {
+      background: #f5f5f4;
+    }
+
+    .scaler-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: #b45309;
+      box-shadow: 0 2px 4px rgba(217, 119, 6, 0.3);
+    }
+
+    .scaler-custom {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* TOGGLE SWITCH FOR FIXED / VARIABLE OVERHEADS */
+    .toggle-btn {
+      background: #f5f5f4;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+
+    .toggle-btn.variable {
+      background: #fef3c7;
+      border-color: #fcd34d;
+      color: #92400e;
+    }
+
+    .toggle-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #a8a29e;
+    }
+
+    .toggle-btn.variable .toggle-dot {
+      background: #d97706;
+    }
+
+    /* KPI METRIC CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .kpi-val {
+      font-size: 18px;
+      font-weight: 800;
+      font-family: monospace;
+      color: var(--text-main);
+      margin: 4px 0 2px;
+    }
+
+    .kpi-sub {
+      font-size: 10px;
+      color: var(--text-light);
+      font-family: monospace;
+    }
+
+    .kpi-profit {
+      background: var(--profit-green-bg);
+      border-color: var(--profit-green-border);
+    }
+    .kpi-profit .kpi-label { color: var(--profit-green); }
+    .kpi-profit .kpi-val { color: var(--profit-green); }
+
+    .kpi-loss {
+      background: var(--loss-red-bg);
+      border-color: var(--loss-red-border);
+    }
+    .kpi-loss .kpi-label { color: var(--loss-red); }
+    .kpi-loss .kpi-val { color: var(--loss-red); }
+
+    /* SHRINKAGE BOX */
+    .shrinkage-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    /* FINANCIAL BREAKDOWN SUMMARY */
+    .financial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      background: #ffffff;
+      margin-top: 16px;
+    }
+
+    .fin-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #f5f5f4;
+      font-size: 12px;
+    }
+
+    .fin-row.highlight {
+      background: #fdfaf6;
+      border-bottom: 2px solid var(--primary);
+      padding: 8px 6px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .fin-row.profit {
+      background: var(--profit-green-bg);
+      border-bottom: 2px solid var(--profit-green);
+      padding: 8px 6px;
+      font-weight: 800;
+      color: var(--profit-green);
+      font-size: 14px;
+    }
+
+    .fin-row.loss {
+      background: var(--loss-red-bg);
+      border-bottom: 2px solid var(--loss-red);
+      padding: 8px 6px;
+      font-weight: 800;
+      color: var(--loss-red);
+      font-size: 14px;
+    }
+
+    /* PRINT STYLES */
+    @media print {
+      body { background: #ffffff; padding: 0; }
+      .header-actions, .tabs-nav, .btn, .btn-delete, .scaler-presets { display: none !important; }
+      .card { box-shadow: none; border: 1px solid #000; margin-bottom: 16px; }
+      .card-header { background: #eee !important; color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- PRIMARY BRAND HEADER -->
+    <header class="header-banner">
+      <div class="header-title-wrap">
+        <div class="header-icon">👨‍🍳</div>
+        <div>
+          <div class="header-h1">
+            Tenzo Cafe and Bakers
+            <span class="header-badge">Enterprise BMS</span>
+          </div>
+          <div class="header-subtitle">
+            Enterprise Bakery Management System • Master Purchase Database &amp; Recipe Batch Engine
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-header" onclick="resetDefaults()">↺ Reset Defaults</button>
+        <button class="btn-header" onclick="window.print()">🖨️ Print Sheet</button>
+      </div>
+    </header>
+
+    <!-- 2-TAB NAVIGATION BAR -->
+    <nav class="tabs-nav">
+      <div class="tabs-group">
+        <button id="tab-btn-inv" class="tab-btn active" onclick="switchTab('inventory')">
+          📦 Tab 1: Master Ingredient Inventory
+          <span id="inv-count-pill" class="tab-pill">12 Items</span>
+        </button>
+        <button id="tab-btn-rec" class="tab-btn" onclick="switchTab('recipes')">
+          📋 Tab 2: Recipe Costing &amp; Profit Calculator
+          <span id="profit-badge-pill" class="tab-pill">+51% Margin</span>
+        </button>
+      </div>
+      <div class="sync-status">
+        <span class="sync-dot"></span>
+        <span>LocalStorage Auto-Saved &amp; Reactive</span>
+      </div>
+    </nav>
+
+    <!-- TAB 1 CONTENT: MASTER INGREDIENT INVENTORY -->
+    <div id="tab-content-inventory">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="card-step-badge">1</span>
+              Master Ingredient Inventory (Purchase Database)
+            </div>
+            <div class="card-subtitle">
+              Enter bulk purchase prices and quantities. Unit prices are automatically computed and synchronize across all recipes.
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="addInventoryRow()">+ Add Master Ingredient</button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <!-- Benchmarks -->
+          <div class="benchmark-grid">
+            <div class="benchmark-item">
+              <span class="benchmark-label">Wheat Flour Mill</span>
+              <span class="benchmark-val">50 kg @ Rs 9,750 = Rs 195/kg</span>
+            </div>
+            <div class="benchmark-item">
+              <span class="benchmark-label">Sugar Benchmark</span>
+              <span class="benchmark-val">50 kg @ Rs 11,600 = Rs 232/kg</span>
+            </div>
+            <div class="benchmark-item">
+              <span class="benchmark-label">Beehive Margarine</span>
+              <span class="benchmark-val">20 kg @ Rs 20,400 = Rs 1,020/kg</span>
+            </div>
+            <div class="benchmark-item">
+              <span class="benchmark-label">Hycho Shortening</span>
+              <span class="benchmark-val">20 kg @ Rs 10,750 = Rs 537.50/kg</span>
+            </div>
+          </div>
+
+          <!-- Inventory Table -->
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 40px; text-align: center;">#</th>
+                  <th style="min-width: 220px;">Ingredient Name</th>
+                  <th style="min-width: 140px;">Bulk Package Quantity</th>
+                  <th style="min-width: 150px;">Unit of Measurement [UOM]</th>
+                  <th style="min-width: 160px;">Total Bulk Purchase Price</th>
+                  <th style="min-width: 180px; background: #fef3c7; color: #78350f;">Calculated Unit Price</th>
+                  <th style="width: 60px; text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-tbody">
+                <!-- Populated via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <button class="btn btn-secondary" onclick="addInventoryRow()">+ Add Another Ingredient Row</button>
+            <span style="font-size: 11px; color: var(--text-muted); font-style: italic;">
+              Formula: Unit Price = Total Bulk Price ÷ Bulk Package Quantity
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2 CONTENT: RECIPE COSTING & PROFIT CALCULATOR -->
+    <div id="tab-content-recipes" style="display: none;">
+      <!-- TOP FINANCIAL KPI SNAPSHOT -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Direct Cost</div>
+          <div id="kpi-direct-cost" class="kpi-val">Rs 0.00</div>
+          <div class="kpi-sub">Ingredients</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Overhead Cost</div>
+          <div id="kpi-indirect-cost" class="kpi-val">Rs 0.00</div>
+          <div class="kpi-sub">Fixed + Variable</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Total Cost</div>
+          <div id="kpi-total-cost" class="kpi-val">Rs 0.00</div>
+          <div class="kpi-sub">Direct + Indirect</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Gross Revenue</div>
+          <div id="kpi-revenue" class="kpi-val">Rs 0.00</div>
+          <div id="kpi-outcome-sub" class="kpi-sub">Yield Sales</div>
+        </div>
+        <div id="kpi-profit-card" class="kpi-card kpi-profit">
+          <div class="kpi-label">Net Profit</div>
+          <div id="kpi-profit" class="kpi-val">Rs 0.00</div>
+          <div id="kpi-profit-status" class="kpi-sub">Profitable</div>
+        </div>
+        <div id="kpi-margin-card" class="kpi-card kpi-profit">
+          <div class="kpi-label">Gross Margin</div>
+          <div id="kpi-margin" class="kpi-val">0.0%</div>
+          <div id="kpi-unit-cost-sub" class="kpi-sub">Cost per unit</div>
+        </div>
+      </div>
+
+      <!-- RECIPE CONFIG & BATCH SCALER -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="card-step-badge">1</span>
+              Recipe Details &amp; Batch Scaling
+            </div>
+            <div class="card-subtitle">
+              Select or name your bakery recipe and configure the batch multiplier.
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-secondary" onclick="loadRecipePreset('cake')">Butter Cake 6kg</button>
+            <button class="btn btn-secondary" onclick="loadRecipePreset('sweet-bun')">Sweet Bun 50pcs</button>
+            <button class="btn btn-secondary" onclick="loadRecipePreset('curry-bun')">Curry Bun 40pcs</button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">
+              Recipe / Item Name
+            </label>
+            <input id="recipe-name-input" type="text" class="form-control" style="font-size: 14px; font-weight: 800;" value="Butter Cake 6kg Batch" oninput="updateRecipeName(this.value)">
+          </div>
+
+          <!-- Scaler bar -->
+          <div class="scaler-card">
+            <div>
+              <span style="font-size: 12px; font-weight: 700; color: var(--text-main);">Batch Scaling Multiplier:</span>
+              <span id="scaler-display-badge" style="background: #fef3c7; color: #78350f; font-weight: 800; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-family: monospace; margin-left: 6px;">1.0x</span>
+            </div>
+            <div class="scaler-presets">
+              <button class="scaler-btn" onclick="setMultiplier(0.5)">0.5x</button>
+              <button class="scaler-btn active" onclick="setMultiplier(1.0)">1x</button>
+              <button class="scaler-btn" onclick="setMultiplier(1.5)">1.5x</button>
+              <button class="scaler-btn" onclick="setMultiplier(2.0)">2x</button>
+              <button class="scaler-btn" onclick="setMultiplier(3.0)">3x</button>
+            </div>
+            <div class="scaler-custom">
+              <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Custom:</span>
+              <input id="custom-multiplier-input" type="number" min="0.1" step="0.1" value="1.0" class="form-control" style="width: 80px; text-align: center; font-weight: 800;" oninput="setMultiplier(parseFloat(this.value) || 1)">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIRECT INGREDIENTS SECTION -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="card-step-badge">2</span>
+              Direct Ingredients Section (Pulled Live from Tab 1)
+            </div>
+            <div class="card-subtitle">
+              Select items from Master Inventory. Cost calculates live: (Quantity Needed × Master Unit Cost).
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="addRecipeIngredientRow()">+ Add Ingredient Row</button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 40px; text-align: center;">#</th>
+                  <th style="min-width: 220px;">Master Ingredient</th>
+                  <th style="min-width: 120px;">Quantity Needed</th>
+                  <th style="min-width: 100px;">Recipe UOM</th>
+                  <th style="min-width: 140px;">Master Unit Cost</th>
+                  <th style="min-width: 130px; background: #fdfaf6;">Base Cost (1x)</th>
+                  <th style="min-width: 140px; background: #fef3c7; color: #78350f;">Scaled Cost</th>
+                  <th style="width: 50px; text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="recipe-ingredients-tbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+            <button class="btn btn-secondary" onclick="addRecipeIngredientRow()">+ Add Ingredient Row</button>
+            <span style="font-size: 11px; color: var(--text-muted);">
+              Examples: 1.5kg Flour = Rs 300 • 1.5kg Sugar = Rs 240 • 1.5kg Margarine = Rs 1,200 • 30 Eggs = Rs 900
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- INDIRECT OVERHEAD ALLOCATION -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="card-step-badge">3</span>
+              Indirect Overhead Allocation (Fixed vs Variable)
+            </div>
+            <div class="card-subtitle">
+              Variable overheads scale with batch multiplier; Fixed overheads remain constant.
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="addOverheadRow()">+ Add Overhead Row</button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 40px; text-align: center;">#</th>
+                  <th style="min-width: 240px;">Expense Name / Category</th>
+                  <th style="min-width: 160px;">Base Cost (Rs)</th>
+                  <th style="min-width: 180px;">Cost Behavior</th>
+                  <th style="min-width: 150px; background: #fef3c7; color: #78350f;">Scaled Cost</th>
+                  <th style="width: 50px; text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="overheads-tbody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top: 14px;">
+            <button class="btn btn-secondary" onclick="addOverheadRow()">+ Add Overhead Row</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BATCH OUTCOME & PROFIT ANALYSIS -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="card-step-badge">4</span>
+              Batch Outcome, Evaporation Loss &amp; Profit Analysis
+            </div>
+            <div class="card-subtitle">
+              Calculates baking shrinkage/evaporation loss and total batch net profit margins.
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <!-- Shrinkage engine -->
+          <div class="shrinkage-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="font-size: 12px; font-weight: 800; color: #78350f;">🔥 Baking Evaporation &amp; Shrinkage Loss Engine</span>
+              <span id="shrinkage-percent-badge" style="background: #fde68a; color: #78350f; font-weight: 800; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-family: monospace;">7.7% Shrinkage</span>
+            </div>
+
+            <div class="grid-3">
+              <div>
+                <label style="display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">
+                  Raw Batter / Dough Weight (kg) [Base 1x]
+                </label>
+                <div class="input-prefix-wrap">
+                  <input id="raw-batter-input" type="number" step="0.1" value="6.5" class="form-control" oninput="updateOutcomeField('rawBatterWeight', parseFloat(this.value)||0)">
+                </div>
+              </div>
+              <div>
+                <label style="display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">
+                  Finished Product Baked Weight (kg) [Base 1x]
+                </label>
+                <div class="input-prefix-wrap">
+                  <input id="finished-weight-input" type="number" step="0.1" value="6.0" class="form-control" oninput="updateOutcomeField('finishedProductWeight', parseFloat(this.value)||0)">
+                </div>
+              </div>
+              <div style="background: #ffffff; border: 1px solid #fde68a; border-radius: var(--radius-sm); padding: 8px 12px; display: flex; flex-direction: column; justify-content: center;">
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Moisture Loss</span>
+                <span id="evaporation-loss-kg" style="font-size: 14px; font-weight: 800; font-family: monospace; color: #78350f;">0.50 kg (7.7%)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Outcome yield and selling price -->
+          <div class="grid-3">
+            <div>
+              <label style="display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">
+                Total Outcome Quantity [Base 1x]
+              </label>
+              <input id="outcome-qty-input" type="number" step="any" value="6" class="form-control" style="font-weight: 800;" oninput="updateOutcomeField('outcomeQuantity', parseFloat(this.value)||1)">
+              <span id="scaled-outcome-qty-note" style="font-size: 10px; color: var(--text-light); font-family: monospace; margin-top: 4px; display: block;">Scaled Yield: 6.00 kg</span>
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">
+                Unit Type (Free-Text)
+              </label>
+              <input id="outcome-unit-input" type="text" value="kg" class="form-control" placeholder="e.g. kg, pieces, loaves" oninput="updateOutcomeField('outcomeUnitType', this.value)">
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">
+                Selling Price per Unit (in Rs)
+              </label>
+              <div class="input-prefix-wrap">
+                <span class="input-prefix">Rs</span>
+                <input id="selling-price-input" type="number" step="any" value="1200" class="form-control input-with-prefix" style="font-weight: 800;" oninput="updateOutcomeField('sellingPricePerUnit', parseFloat(this.value)||0)">
+              </div>
+            </div>
+          </div>
+
+          <!-- Comprehensive Financial Table -->
+          <div class="financial-grid">
+            <div>
+              <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+                Cost Breakdown
+              </div>
+              <div class="fin-row">
+                <span>Direct Ingredient Cost:</span>
+                <span id="fin-direct-cost" style="font-family: monospace; font-weight: 700;">Rs 0.00</span>
+              </div>
+              <div class="fin-row">
+                <span>Indirect Overheads:</span>
+                <span id="fin-indirect-cost" style="font-family: monospace; font-weight: 700;">Rs 0.00</span>
+              </div>
+              <div class="fin-row highlight">
+                <span>Total Production Cost:</span>
+                <span id="fin-total-cost" style="font-family: monospace; font-weight: 800;">Rs 0.00</span>
+              </div>
+              <div class="fin-row">
+                <span>Cost per Unit:</span>
+                <span id="fin-unit-cost" style="font-family: monospace; font-weight: 700;">Rs 0.00</span>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+                Revenue &amp; Net Profit
+              </div>
+              <div class="fin-row">
+                <span>Scaled Yield:</span>
+                <span id="fin-scaled-yield" style="font-family: monospace; font-weight: 700;">0 units</span>
+              </div>
+              <div class="fin-row">
+                <span>Total Revenue:</span>
+                <span id="fin-revenue" style="font-family: monospace; font-weight: 700;">Rs 0.00</span>
+              </div>
+              <div id="fin-profit-row" class="fin-row profit">
+                <span>Net Profit:</span>
+                <span id="fin-net-profit" style="font-family: monospace; font-weight: 800; font-size: 15px;">Rs 0.00</span>
+              </div>
+              <div class="fin-row">
+                <span>Gross Profit Margin:</span>
+                <span id="fin-margin" style="font-family: monospace; font-weight: 800;">0.0%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer style="margin-top: 30px; text-align: center; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 16px;">
+      Tenzo Cafe and Bakers • Enterprise Bakery Management System (BMS) • Master Inventory &amp; Recipe Batch Engine
+    </footer>
+  </div>
+
+  <script>
+    /* MASTER INVENTORY & RECIPES STATE */
+    const STORAGE_KEY_INV = 'tenzo_bms_standalone_inv_v3';
+    const STORAGE_KEY_REC = 'tenzo_bms_standalone_rec_v3';
+
+    const DEFAULT_INVENTORY = [
+      { id: 'inv-1', name: 'Wheat Flour Mill', bulkQuantity: 50, uom: 'kg', bulkPrice: 9750 },
+      { id: 'inv-2', name: 'Wheat Flour Hammer', bulkQuantity: 50, uom: 'kg', bulkPrice: 8830 },
+      { id: 'inv-3', name: 'Sugar', bulkQuantity: 50, uom: 'kg', bulkPrice: 11600 },
+      { id: 'inv-4', name: 'Beehive Margarine', bulkQuantity: 20, uom: 'kg', bulkPrice: 20400 },
+      { id: 'inv-5', name: 'Hycho', bulkQuantity: 20, uom: 'kg', bulkPrice: 10750 },
+      { id: 'inv-6', name: 'Egg', bulkQuantity: 1, uom: 'pieces', bulkPrice: 40 },
+      { id: 'inv-7', name: 'Bread Yeast', bulkQuantity: 500, uom: 'g', bulkPrice: 950 },
+      { id: 'inv-8', name: 'Bun Yeast', bulkQuantity: 500, uom: 'g', bulkPrice: 950 },
+      { id: 'inv-9', name: 'Vanilla Essence', bulkQuantity: 500, uom: 'ml', bulkPrice: 1500 },
+      { id: 'inv-10', name: 'Cocoa Powder', bulkQuantity: 1, uom: 'kg', bulkPrice: 2500 },
+      { id: 'inv-11', name: 'Colouring', bulkQuantity: 500, uom: 'ml', bulkPrice: 850 },
+      { id: 'inv-12', name: 'Dry Fruits', bulkQuantity: 1, uom: 'kg', bulkPrice: 2400 },
+      { id: 'inv-13', name: 'Baking Powder', bulkQuantity: 1, uom: 'kg', bulkPrice: 1200 }
+    ];
+
+    const PRESET_RECIPES = {
+      'cake': {
+        name: 'Butter Cake 6kg Batch',
+        batchMultiplier: 1.0,
+        ingredients: [
+          { id: 'r1', masterIngredientId: 'inv-1', quantityNeeded: 1.5, uom: 'kg' },
+          { id: 'r2', masterIngredientId: 'inv-3', quantityNeeded: 1.5, uom: 'kg' },
+          { id: 'r3', masterIngredientId: 'inv-4', quantityNeeded: 1.5, uom: 'kg' },
+          { id: 'r4', masterIngredientId: 'inv-6', quantityNeeded: 30, uom: 'pieces' },
+          { id: 'r5', masterIngredientId: 'inv-13', quantityNeeded: 30, uom: 'g' },
+          { id: 'r6', masterIngredientId: 'inv-9', quantityNeeded: 25, uom: 'ml' },
+          { id: 'r7', masterIngredientId: 'inv-11', quantityNeeded: 5, uom: 'ml' }
+        ],
+        overheads: [
+          { id: 'o1', name: 'Electricity (Ovens & Mixer)', cost: 200, isVariable: true },
+          { id: 'o2', name: 'LPG Gas (Baking Heat)', cost: 150, isVariable: true },
+          { id: 'o3', name: 'Baker Salary / Labor Allocation', cost: 300, isVariable: false },
+          { id: 'o4', name: 'Packaging Box & Cake Board', cost: 100, isVariable: true }
+        ],
+        rawBatterWeight: 6.5,
+        finishedProductWeight: 6.0,
+        outcomeQuantity: 6,
+        outcomeUnitType: 'kg',
+        sellingPricePerUnit: 1200
+      },
+      'sweet-bun': {
+        name: 'Sweet Bun (50 pcs Batch)',
+        batchMultiplier: 1.0,
+        ingredients: [
+          { id: 'sb1', masterIngredientId: 'inv-1', quantityNeeded: 2.0, uom: 'kg' },
+          { id: 'sb2', masterIngredientId: 'inv-3', quantityNeeded: 400, uom: 'g' },
+          { id: 'sb3', masterIngredientId: 'inv-4', quantityNeeded: 250, uom: 'g' },
+          { id: 'sb4', masterIngredientId: 'inv-6', quantityNeeded: 4, uom: 'pieces' },
+          { id: 'sb5', masterIngredientId: 'inv-8', quantityNeeded: 30, uom: 'g' },
+          { id: 'sb6', masterIngredientId: 'inv-9', quantityNeeded: 10, uom: 'ml' }
+        ],
+        overheads: [
+          { id: 'so1', name: 'Electricity (Mixer & Proofer)', cost: 180, isVariable: true },
+          { id: 'so2', name: 'LPG Gas', cost: 140, isVariable: true },
+          { id: 'so3', name: 'Baker Wages', cost: 250, isVariable: false }
+        ],
+        rawBatterWeight: 4.2,
+        finishedProductWeight: 3.8,
+        outcomeQuantity: 50,
+        outcomeUnitType: 'pieces',
+        sellingPricePerUnit: 45
+      },
+      'curry-bun': {
+        name: 'Curry Bun (40 pcs Batch)',
+        batchMultiplier: 1.0,
+        ingredients: [
+          { id: 'cb1', masterIngredientId: 'inv-2', quantityNeeded: 1.8, uom: 'kg' },
+          { id: 'cb2', masterIngredientId: 'inv-3', quantityNeeded: 150, uom: 'g' },
+          { id: 'cb3', masterIngredientId: 'inv-5', quantityNeeded: 200, uom: 'g' },
+          { id: 'cb4', masterIngredientId: 'inv-7', quantityNeeded: 25, uom: 'g' },
+          { id: 'cb5', masterIngredientId: 'inv-6', quantityNeeded: 2, uom: 'pieces' }
+        ],
+        overheads: [
+          { id: 'co1', name: 'Electricity', cost: 150, isVariable: true },
+          { id: 'co2', name: 'Gas', cost: 130, isVariable: true },
+          { id: 'co3', name: 'Baker & Kitchen Labor', cost: 280, isVariable: false },
+          { id: 'co4', name: 'Wax Paper Bags', cost: 80, isVariable: true }
+        ],
+        rawBatterWeight: 4.5,
+        finishedProductWeight: 4.1,
+        outcomeQuantity: 40,
+        outcomeUnitType: 'pieces',
+        sellingPricePerUnit: 120
+      }
+    };
+
+    let inventory = [];
+    let currentRecipe = {};
+
+    function init() {
+      // Load inventory
+      try {
+        const savedInv = localStorage.getItem(STORAGE_KEY_INV);
+        inventory = savedInv ? JSON.parse(savedInv) : JSON.parse(JSON.stringify(DEFAULT_INVENTORY));
+      } catch (e) {
+        inventory = JSON.parse(JSON.stringify(DEFAULT_INVENTORY));
+      }
+
+      // Load recipe
+      try {
+        const savedRec = localStorage.getItem(STORAGE_KEY_REC);
+        currentRecipe = savedRec ? JSON.parse(savedRec) : JSON.parse(JSON.stringify(PRESET_RECIPES['cake']));
+      } catch (e) {
+        currentRecipe = JSON.parse(JSON.stringify(PRESET_RECIPES['cake']));
+      }
+
+      renderInventory();
+      renderRecipe();
+      calculateAll();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY_INV, JSON.stringify(inventory));
+        localStorage.setItem(STORAGE_KEY_REC, JSON.stringify(currentRecipe));
+      } catch (e) {
+        console.error('Storage error', e);
+      }
+    }
+
+    function switchTab(tab) {
+      const isInv = tab === 'inventory';
+      document.getElementById('tab-btn-inv').classList.toggle('active', isInv);
+      document.getElementById('tab-btn-rec').classList.toggle('active', !isInv);
+      document.getElementById('tab-content-inventory').style.display = isInv ? 'block' : 'none';
+      document.getElementById('tab-content-recipes').style.display = isInv ? 'none' : 'block';
+    }
+
+    function formatRs(amount) {
+      if (isNaN(amount) || !isFinite(amount)) return 'Rs 0.00';
+      const isNeg = amount < 0;
+      const abs = Math.abs(amount);
+      const str = new Intl.NumberFormat('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(abs);
+      return (isNeg ? '- ' : '') + 'Rs ' + str;
+    }
+
+    /* TAB 1: INVENTORY RENDERING & ACTIONS */
+    function renderInventory() {
+      const tbody = document.getElementById('inventory-tbody');
+      tbody.innerHTML = '';
+      document.getElementById('inv-count-pill').textContent = inventory.length + ' Items';
+
+      inventory.forEach((item, idx) => {
+        const unitPrice = (item.bulkQuantity > 0) ? (item.bulkPrice / item.bulkQuantity) : 0;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="text-align: center; color: var(--text-light); font-family: monospace;">${idx + 1}</td>
+          <td>
+            <input type="text" class="form-control" value="${escapeHtml(item.name)}" oninput="updateInvItem('${item.id}', 'name', this.value)">
+          </td>
+          <td>
+            <input type="number" min="0.01" step="any" class="form-control" value="${item.bulkQuantity}" oninput="updateInvItem('${item.id}', 'bulkQuantity', parseFloat(this.value)||0.01)">
+          </td>
+          <td>
+            <select class="form-control" onchange="updateInvItem('${item.id}', 'uom', this.value)">
+              <option value="kg" ${item.uom === 'kg' ? 'selected' : ''}>kg (Kilograms)</option>
+              <option value="g" ${item.uom === 'g' ? 'selected' : ''}>g (Grams)</option>
+              <option value="liters" ${item.uom === 'liters' ? 'selected' : ''}>liters (Litres)</option>
+              <option value="ml" ${item.uom === 'ml' ? 'selected' : ''}>ml (Millilitres)</option>
+              <option value="pieces" ${item.uom === 'pieces' ? 'selected' : ''}>pieces (Pcs / Eggs)</option>
+              <option value="packets" ${item.uom === 'packets' ? 'selected' : ''}>packets (Packets)</option>
+            </select>
+          </td>
+          <td>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">Rs</span>
+              <input type="number" min="0" step="any" class="form-control input-with-prefix" value="${item.bulkPrice}" oninput="updateInvItem('${item.id}', 'bulkPrice', parseFloat(this.value)||0)">
+            </div>
+          </td>
+          <td style="background: rgba(254, 243, 199, 0.4);">
+            <div style="font-weight: 800; color: #78350f; font-family: monospace; font-size: 13px;">
+              ${formatRs(unitPrice)} / ${item.uom}
+            </div>
+            <div style="font-size: 10px; color: var(--text-muted); font-family: monospace;">
+              (${item.bulkPrice} ÷ ${item.bulkQuantity} ${item.uom})
+            </div>
+          </td>
+          <td style="text-align: center;">
+            <button class="btn-delete" title="Delete" onclick="deleteInvItem('${item.id}')">🗑️</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateInvItem(id, field, value) {
+      const item = inventory.find(i => i.id === id);
+      if (item) {
+        item[field] = value;
+        saveState();
+        calculateAll();
+        // re-render Tab 2 options and line costs dynamically
+        renderRecipeIngredients();
+      }
+    }
+
+    function addInventoryRow() {
+      const newId = 'inv-' + Date.now();
+      inventory.push({
+        id: newId,
+        name: 'New Ingredient',
+        bulkQuantity: 10,
+        uom: 'kg',
+        bulkPrice: 2000
+      });
+      saveState();
+      renderInventory();
+      renderRecipeIngredients();
+      calculateAll();
+    }
+
+    function deleteInvItem(id) {
+      if (inventory.length <= 1) {
+        alert('Master inventory must contain at least 1 ingredient.');
+        return;
+      }
+      inventory = inventory.filter(i => i.id !== id);
+      saveState();
+      renderInventory();
+      renderRecipeIngredients();
+      calculateAll();
+    }
+
+    /* TAB 2: RECIPE DETAILS & ACTIONS */
+    function renderRecipe() {
+      document.getElementById('recipe-name-input').value = currentRecipe.name || '';
+      document.getElementById('raw-batter-input').value = currentRecipe.rawBatterWeight || 0;
+      document.getElementById('finished-weight-input').value = currentRecipe.finishedProductWeight || 0;
+      document.getElementById('outcome-qty-input').value = currentRecipe.outcomeQuantity || 1;
+      document.getElementById('outcome-unit-input').value = currentRecipe.outcomeUnitType || 'units';
+      document.getElementById('selling-price-input').value = currentRecipe.sellingPricePerUnit || 0;
+      document.getElementById('custom-multiplier-input').value = currentRecipe.batchMultiplier || 1.0;
+      updateScalerButtons();
+      renderRecipeIngredients();
+      renderOverheads();
+    }
+
+    function updateRecipeName(val) {
+      currentRecipe.name = val;
+      saveState();
+    }
+
+    function updateOutcomeField(field, val) {
+      currentRecipe[field] = val;
+      saveState();
+      calculateAll();
+    }
+
+    function setMultiplier(mult) {
+      currentRecipe.batchMultiplier = mult;
+      document.getElementById('custom-multiplier-input').value = mult;
+      document.getElementById('scaler-display-badge').textContent = mult.toFixed(1) + 'x';
+      updateScalerButtons();
+      saveState();
+      calculateAll();
+    }
+
+    function updateScalerButtons() {
+      const mult = currentRecipe.batchMultiplier;
+      document.querySelectorAll('.scaler-btn').forEach(btn => {
+        const textVal = parseFloat(btn.textContent);
+        btn.classList.toggle('active', textVal === mult);
+      });
+    }
+
+    function loadRecipePreset(presetKey) {
+      const p = PRESET_RECIPES[presetKey];
+      if (!p) return;
+      currentRecipe = JSON.parse(JSON.stringify(p));
+      saveState();
+      renderRecipe();
+      calculateAll();
+    }
+
+    function getInvItemCost(neededQty, neededUom, master) {
+      if (!master || master.bulkQuantity <= 0) return { masterUnitPrice: 0, baseCost: 0 };
+      const masterUnitPrice = master.bulkPrice / master.bulkQuantity;
+
+      let factor = 1;
+      if (master.uom === 'kg') {
+        if (neededUom === 'g') factor = 0.001;
+        else if (neededUom === 'kg') factor = 1;
+      } else if (master.uom === 'g') {
+        if (neededUom === 'kg') factor = 1000;
+        else if (neededUom === 'g') factor = 1;
+      } else if (master.uom === 'liters') {
+        if (neededUom === 'ml') factor = 0.001;
+        else if (neededUom === 'liters') factor = 1;
+      } else if (master.uom === 'ml') {
+        if (neededUom === 'liters') factor = 1000;
+        else if (neededUom === 'ml') factor = 1;
+      }
+
+      const effectiveQty = (neededQty || 0) * factor;
+      const baseCost = effectiveQty * masterUnitPrice;
+      return { masterUnitPrice, baseCost };
+    }
+
+    function renderRecipeIngredients() {
+      const tbody = document.getElementById('recipe-ingredients-tbody');
+      tbody.innerHTML = '';
+      const mult = currentRecipe.batchMultiplier || 1.0;
+
+      currentRecipe.ingredients.forEach((row, idx) => {
+        const master = inventory.find(i => i.id === row.masterIngredientId);
+        const { masterUnitPrice, baseCost } = getInvItemCost(row.quantityNeeded, row.uom, master);
+        const scaledCost = baseCost * mult;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="text-align: center; color: var(--text-light); font-family: monospace;">${idx + 1}</td>
+          <td>
+            <select class="form-control" onchange="updateIngredientRow('${row.id}', 'masterIngredientId', this.value)">
+              ${inventory.map(inv => `
+                <option value="${inv.id}" ${inv.id === row.masterIngredientId ? 'selected' : ''}>
+                  ${escapeHtml(inv.name)} (${inv.uom})
+                </option>
+              `).join('')}
+            </select>
+          </td>
+          <td>
+            <input type="number" min="0" step="any" class="form-control" value="${row.quantityNeeded}" oninput="updateIngredientRow('${row.id}', 'quantityNeeded', parseFloat(this.value)||0)">
+          </td>
+          <td>
+            <select class="form-control" onchange="updateIngredientRow('${row.id}', 'uom', this.value)">
+              <option value="kg" ${row.uom === 'kg' ? 'selected' : ''}>kg</option>
+              <option value="g" ${row.uom === 'g' ? 'selected' : ''}>g</option>
+              <option value="liters" ${row.uom === 'liters' ? 'selected' : ''}>liters</option>
+              <option value="ml" ${row.uom === 'ml' ? 'selected' : ''}>ml</option>
+              <option value="pieces" ${row.uom === 'pieces' ? 'selected' : ''}>pieces</option>
+              <option value="packets" ${row.uom === 'packets' ? 'selected' : ''}>packets</option>
+            </select>
+          </td>
+          <td style="font-family: monospace;">
+            <span style="font-weight: 700;">${formatRs(masterUnitPrice)}</span>
+            <span style="font-size: 10px; color: var(--text-muted);">/ ${master ? master.uom : ''}</span>
+          </td>
+          <td style="background: #fdfaf6; font-family: monospace; font-weight: 700;">
+            ${formatRs(baseCost)}
+          </td>
+          <td style="background: rgba(254, 243, 199, 0.4); font-family: monospace; font-weight: 800; color: #78350f;">
+            ${formatRs(scaledCost)}
+          </td>
+          <td style="text-align: center;">
+            <button class="btn-delete" title="Remove" onclick="removeIngredientRow('${row.id}')">🗑️</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateIngredientRow(rowId, field, val) {
+      const row = currentRecipe.ingredients.find(r => r.id === rowId);
+      if (row) {
+        row[field] = val;
+        // If master item changes, match UOM automatically
+        if (field === 'masterIngredientId') {
+          const m = inventory.find(i => i.id === val);
+          if (m) row.uom = m.uom;
+        }
+        saveState();
+        renderRecipeIngredients();
+        calculateAll();
+      }
+    }
+
+    function addRecipeIngredientRow() {
+      const newId = 'r-' + Date.now();
+      currentRecipe.ingredients.push({
+        id: newId,
+        masterIngredientId: inventory[0] ? inventory[0].id : '',
+        quantityNeeded: 1,
+        uom: inventory[0] ? inventory[0].uom : 'kg'
+      });
+      saveState();
+      renderRecipeIngredients();
+      calculateAll();
+    }
+
+    function removeIngredientRow(rowId) {
+      if (currentRecipe.ingredients.length <= 1) {
+        alert('Recipe requires at least 1 ingredient row.');
+        return;
+      }
+      currentRecipe.ingredients = currentRecipe.ingredients.filter(r => r.id !== rowId);
+      saveState();
+      renderRecipeIngredients();
+      calculateAll();
+    }
+
+    /* OVERHEADS RENDERING & ACTIONS */
+    function renderOverheads() {
+      const tbody = document.getElementById('overheads-tbody');
+      tbody.innerHTML = '';
+      const mult = currentRecipe.batchMultiplier || 1.0;
+
+      currentRecipe.overheads.forEach((ovh, idx) => {
+        const scaled = ovh.isVariable ? (ovh.cost * mult) : ovh.cost;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="text-align: center; color: var(--text-light); font-family: monospace;">${idx + 1}</td>
+          <td>
+            <input type="text" class="form-control" value="${escapeHtml(ovh.name)}" oninput="updateOverheadRow('${ovh.id}', 'name', this.value)">
+          </td>
+          <td>
+            <div class="input-prefix-wrap">
+              <span class="input-prefix">Rs</span>
+              <input type="number" min="0" step="any" class="form-control input-with-prefix" value="${ovh.cost}" oninput="updateOverheadRow('${ovh.id}', 'cost', parseFloat(this.value)||0)">
+            </div>
+          </td>
+          <td>
+            <button class="toggle-btn ${ovh.isVariable ? 'variable' : ''}" onclick="toggleOverheadBehavior('${ovh.id}')">
+              <span class="toggle-dot"></span>
+              <span>${ovh.isVariable ? 'Variable (Scales with Multiplier)' : 'Fixed (Stays Constant)'}</span>
+            </button>
+          </td>
+          <td style="background: rgba(254, 243, 199, 0.4); font-family: monospace; font-weight: 800; color: #78350f;">
+            ${formatRs(scaled)}
+          </td>
+          <td style="text-align: center;">
+            <button class="btn-delete" title="Remove" onclick="removeOverheadRow('${ovh.id}')">🗑️</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateOverheadRow(id, field, val) {
+      const ovh = currentRecipe.overheads.find(o => o.id === id);
+      if (ovh) {
+        ovh[field] = val;
+        saveState();
+        renderOverheads();
+        calculateAll();
+      }
+    }
+
+    function toggleOverheadBehavior(id) {
+      const ovh = currentRecipe.overheads.find(o => o.id === id);
+      if (ovh) {
+        ovh.isVariable = !ovh.isVariable;
+        saveState();
+        renderOverheads();
+        calculateAll();
+      }
+    }
+
+    function addOverheadRow() {
+      const newId = 'o-' + Date.now();
+      currentRecipe.overheads.push({
+        id: newId,
+        name: 'New Overhead',
+        cost: 100,
+        isVariable: true
+      });
+      saveState();
+      renderOverheads();
+      calculateAll();
+    }
+
+    function removeOverheadRow(id) {
+      currentRecipe.overheads = currentRecipe.overheads.filter(o => o.id !== id);
+      saveState();
+      renderOverheads();
+      calculateAll();
+    }
+
+    /* REAL-TIME CALCULATIONS ENGINE */
+    function calculateAll() {
+      const mult = currentRecipe.batchMultiplier || 1.0;
+
+      // 1. Direct Ingredient Cost
+      let baseDirect = 0;
+      currentRecipe.ingredients.forEach(row => {
+        const master = inventory.find(i => i.id === row.masterIngredientId);
+        const { baseCost } = getInvItemCost(row.quantityNeeded, row.uom, master);
+        baseDirect += baseCost;
+      });
+      const scaledDirect = baseDirect * mult;
+
+      // 2. Overheads Cost
+      let baseIndirect = 0;
+      let scaledIndirect = 0;
+      currentRecipe.overheads.forEach(ovh => {
+        const cost = Number(ovh.cost) || 0;
+        baseIndirect += cost;
+        scaledIndirect += ovh.isVariable ? (cost * mult) : cost;
+      });
+
+      // 3. Total Production Cost
+      const totalCost = scaledDirect + scaledIndirect;
+
+      // 4. Shrinkage & Evaporation
+      const rawWeight = (Number(currentRecipe.rawBatterWeight) || 0) * mult;
+      const finishedWeight = (Number(currentRecipe.finishedProductWeight) || 0) * mult;
+      const lossKg = Math.max(0, rawWeight - finishedWeight);
+      const shrinkagePercent = rawWeight > 0 ? (lossKg / rawWeight) * 100 : 0;
+
+      document.getElementById('shrinkage-percent-badge').textContent = shrinkagePercent.toFixed(1) + '% Shrinkage';
+      document.getElementById('evaporation-loss-kg').textContent = lossKg.toFixed(2) + ' kg (' + shrinkagePercent.toFixed(1) + '%)';
+
+      // 5. Outcome & Revenue
+      const baseYield = Number(currentRecipe.outcomeQuantity) || 1;
+      const scaledYield = baseYield * mult;
+      const pricePerUnit = Number(currentRecipe.sellingPricePerUnit) || 0;
+      const totalRevenue = scaledYield * pricePerUnit;
+
+      const unitCost = scaledYield > 0 ? (totalCost / scaledYield) : 0;
+      const netProfit = totalRevenue - totalCost;
+      const marginPercent = totalRevenue > 0 ? (netProfit / totalRevenue) * 100 : 0;
+      const isProfitable = netProfit >= 0;
+
+      // Update KPI Snapshots
+      document.getElementById('kpi-direct-cost').textContent = formatRs(scaledDirect);
+      document.getElementById('kpi-indirect-cost').textContent = formatRs(scaledIndirect);
+      document.getElementById('kpi-total-cost').textContent = formatRs(totalCost);
+      document.getElementById('kpi-revenue').textContent = formatRs(totalRevenue);
+      document.getElementById('kpi-outcome-sub').textContent = scaledYield.toFixed(2) + ' ' + (currentRecipe.outcomeUnitType || 'units');
+
+      document.getElementById('kpi-profit').textContent = formatRs(netProfit);
+      document.getElementById('kpi-profit-status').textContent = isProfitable ? '▲ Profitable' : '▼ Loss Alert';
+      document.getElementById('kpi-profit-card').className = 'kpi-card ' + (isProfitable ? 'kpi-profit' : 'kpi-loss');
+
+      document.getElementById('kpi-margin').textContent = marginPercent.toFixed(1) + '%';
+      document.getElementById('kpi-unit-cost-sub').textContent = formatRs(unitCost) + ' / unit cost';
+      document.getElementById('kpi-margin-card').className = 'kpi-card ' + (isProfitable ? 'kpi-profit' : 'kpi-loss');
+
+      document.getElementById('profit-badge-pill').textContent = (isProfitable ? '+' : '') + marginPercent.toFixed(0) + '% Margin';
+
+      // Update Financial Grid
+      document.getElementById('fin-direct-cost').textContent = formatRs(scaledDirect);
+      document.getElementById('fin-indirect-cost').textContent = formatRs(scaledIndirect);
+      document.getElementById('fin-total-cost').textContent = formatRs(totalCost);
+      document.getElementById('fin-unit-cost').textContent = formatRs(unitCost) + ' / ' + (currentRecipe.outcomeUnitType || 'unit');
+
+      document.getElementById('fin-scaled-yield').textContent = scaledYield.toFixed(2) + ' ' + (currentRecipe.outcomeUnitType || 'units');
+      document.getElementById('fin-revenue').textContent = formatRs(totalRevenue);
+      document.getElementById('fin-net-profit').textContent = formatRs(netProfit);
+      document.getElementById('fin-margin').textContent = marginPercent.toFixed(1) + '%';
+
+      const finProfitRow = document.getElementById('fin-profit-row');
+      finProfitRow.className = 'fin-row ' + (isProfitable ? 'profit' : 'loss');
+
+      document.getElementById('scaled-outcome-qty-note').textContent = 'Scaled Yield: ' + scaledYield.toFixed(2) + ' ' + (currentRecipe.outcomeUnitType || 'units');
+    }
+
+    function resetDefaults() {
+      if (confirm('Reset Master Inventory and Recipes back to factory default demo values?')) {
+        inventory = JSON.parse(JSON.stringify(DEFAULT_INVENTORY));
+        currentRecipe = JSON.parse(JSON.stringify(PRESET_RECIPES['cake']));
+        localStorage.removeItem(STORAGE_KEY_INV);
+        localStorage.removeItem(STORAGE_KEY_REC);
+        renderInventory();
+        renderRecipe();
+        calculateAll();
+      }
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Initialize application on load
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

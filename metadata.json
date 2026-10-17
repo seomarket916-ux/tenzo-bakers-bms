@@ -1,0 +1,8 @@
+{
+  "name": "Remix Tenzo Cafe and Bakers - Enterprise Bakery Management System",
+  "description": "Commercial bakery management system with Master Ingredient Inventory and Recipe Costing \u0026 Profit Calculator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
